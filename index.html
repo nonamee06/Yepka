@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaspi Mini App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .kaspi-header {
+      background-color: #e30613;
+      color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .custom-file-upload {
+      border: 1px solid #e30613;
+      background-color: #e30613;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .image-preview {
+      margin-top: 20px;
+    }
+
+    .image-preview img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 2px solid #ccc;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #888;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="kaspi-header">Kaspi Mini App</div>
+
+    <label class="custom-file-upload">
+      <input type="file" id="fileInput" accept="image/*" />
+      Загрузить фото
+    </label>
+
+    <div class="image-preview" id="previewContainer"></div>
+
+    <div class="footer">Это неофициальная копия интерфейса Kaspi — только для обучения.</div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const previewContainer = document.getElementById('previewContainer');
+
+    fileInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewContainer.innerHTML = '<img src="' + e.target.result + '" alt="Preview" />';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        previewContainer.innerHTML = '<p>Выберите допустимое изображение.</p>';
+      }
+    });
+  </script>
+
+</body>
+</html>
